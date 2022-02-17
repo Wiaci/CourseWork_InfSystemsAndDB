@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Statuettes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/right-picture.css">
+</head>
+<body>
+    <div id="left">
+
+        <header>
+            <a th:href="@{/}">Tasks</a>
+            <a th:href="@{/tools}">Tools</a>
+            <a th:href="@{/statuettes}">Statuettes</a>
+            <a th:href="@{/exit}">Exit</a>
+            <span>
+                <span>Your money: </span>
+                <span th:text="${money}"></span>
+            </span>
+        </header>
+        <div id="tools-div">
+            <table>
+                <tr>
+                    <th>Citizen</th>
+                    <th>Cost</th>
+                    <th class="action">Buy</th>
+                </tr>
+                <tr th:each="st : ${statuettes}">
+                    <td th:text="${st.citizen.name}"></td>
+                    <td th:text="${st.cost}"></td>
+                    <td class="action">
+                        <form th:action="@{/statuettes/buy}" method="post" th:if="${!st.bought}">
+                            <button class="action" type="submit" name="statuetteId" th:value="${st.id}">Buy</button>
+                        </form>
+                        <span th:unless="${!st.bought}">Bought</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="right" th:class="${citizen.shortName}"></div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+body {
+    background-image: url("../img/background.png");
+}
+
+#main-menu {
+    background-image: url("../img/main_menu.png");
+    width: 1283px;
+    height: 559px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+#grace {
+    float: left;
+    /*display: inline-block;*/
+    height: inherit;
+    width: 50%;
+}
+
+#not-grace {
+    float: left;
+    /*display: inline-block;*/
+    height: inherit;
+    width: 50%;
+}
+
+table {
+    margin-left: 17px;
+}
+
+td {
+    width: 150px;
+    height: 132px;
+}
+
+button {
+    height: 132px;
+    width: 143px;
+    opacity: 0;
+    background-color: #dc7304
+}
+
+#grace-button {
+    width: 640px;
+    height: 550px;
+}
+
+.col1 {
+    margin-left: 2px;
+}
+
+.col2 {
+    margin-left: 14px;
+}
+
+.col3 {
+    margin-left: 15px;
+}
+
+.col4 {
+    margin-left: 8px;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: 10%;
+}

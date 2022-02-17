@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Task</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/right-picture.css">
+</head>
+<body>
+    <div id="left">
+
+        <header>
+            <a th:href="@{/}">Tasks</a>
+            <a th:href="@{/tools}">Tools</a>
+            <a th:href="@{/newTask}">New Task</a>
+            <a th:href="@{/exit}">Exit</a>
+            <span>
+            <span>Your money: </span>
+            <span th:text="${money}"></span>
+        </span>
+        </header>
+        <div id="form-wrapper">
+            <form method="post" th:action="@{/newTask/add}">
+                <div class="form-part">
+                    <label for="select-task-type">Select task type:</label>
+                    <select name="typeId" id="select-task-type">
+                        <option th:value="${type.id}" th:text="${type.name}" th:each="type : ${taskTypes}"></option>
+                    </select>
+                </div>
+                <div class="form-part">
+                    <label for="select-house">Select house:</label>
+                    <select th:if="${houses.size() > 0}" name="houseId" id="select-house">
+                        <option th:each="house : ${houses}" th:value="${house.id}" th:text="${house.name}"></option>
+                    </select>
+                    <span class="error" th:if="${houses.size() == 0}">Choose another task type!</span>
+                </div>
+                <div class="form-part">
+                    <label for="comment">Comment:</label>
+                    <input autocomplete="off" type="text" name="comment" id="comment"/>
+                </div>
+                <div class="form-part">
+                    <span>
+                        <span>Cost:</span>
+                        <span th:text="${cost}"></span>
+                    </span>
+                </div>
+                <span id="not-enough-money" th:hidden="${errorMessageHidden}">
+                    <span>Not enough money:</span>
+                    <span th:text="${diff}"></span>
+                </span>
+                <br>
+                <button id="add-task" type="submit">Add a task</button>
+
+                <script src="/js/jquery-3.6.0.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                <script src="/js/newTaskScript.js"></script>
+            </form>
+        </div>
+    </div>
+    <div id="right" th:class="${citizen.shortName}"></div>
+</body>
+</html>

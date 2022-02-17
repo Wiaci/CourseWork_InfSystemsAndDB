@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/right-picture.css">
+<body>
+    <div id="left">
+        <header>
+            <a th:href="@{/}">Tasks</a>
+            <a th:href="@{/tools}">Tools</a>
+            <a th:if="${citizenId != 14}" th:href="@{/newTask}">New Task</a>
+            <a th:if="${citizenId == 14}" th:href="@{/statuettes}">Statuettes</a>
+            <a th:href="@{/exit}">Exit</a>
+            <span>
+            <span>Your money: </span>
+            <span th:text="${money}"></span>
+        </span>
+        </header>
+        <div id="table-div">
+            <div id="filters-div">
+                <form method="get" th:action="@{/tasks}">
+                <button name="filter" value="all">All</button>
+                <button name="filter" value="my">My</button>
+                <button name="filter" value="new">New</button>
+                <button name="filter" value="exec">Executing</button>
+                <button name="filter" value="wait">Waiting</button>
+            </form>
+            </div>
+            <div id="tasks-table-wrapper">
+
+                <p th:hidden="${noTaskMessageHidden}">No Tasks!</p>
+                <table th:hidden="${tableHidden}">
+                    <tr>
+                        <th>Text</th>
+                        <th>Giver</th>
+                        <th>House</th>
+                        <th>Comment</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="task : ${tasks}">
+                        <td class="text" th:text="${task.key.taskType.name}"></td>
+                        <td class="citizen" th:text="${task.key.giver.name}"></td>
+                        <td class="house" th:text="${task.key.house.name}"></td>
+                        <td class="comment" th:text="${task.key.comment}"></td>
+                        <td class="status" th:text="${task.key.status.name}"></td>
+                        <td class="action">
+                            <div th:if="${(task.key.status.id == 1 || task.key.status.id == 2) && citizenId == 14}">
+                                <form method="post" th:action="@{/tasks/start}" th:if="${task.key.status.id == 1}">
+                                    <button class="action" th:if="${task.value}" name="taskId" th:value="${task.key.id}" type="submit">Start</button>
+                                    <button class="action" th:unless="${task.value}" disabled name="taskId" th:value="${task.key.id}" type="submit">Start</button>
+                                </form>
+                                <form method="post" th:action="@{/tasks/finish}" th:if="${task.key.status.id == 2}">
+                                    <button class="action" name="taskId" th:value="${task.key.id}" type="submit">Finish</button>
+                                </form>
+                            </div>
+                            <div th:if="${task.key.status.id == 3 && citizenId == task.key.giver.id}">
+                                <form method="post" th:action="@{/tasks/approve}">
+                                    <button class="action app" name="taskId" th:value="${task.key.id}" type="submit">+</button>
+                                </form>
+                                <form method="post" th:action="@{/tasks/disapprove}">
+                                    <button class="action disapp" name="taskId" th:value="${task.key.id}" type="submit">-</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="right" th:class="${citizen.shortName}"></div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+header {
+    height: 50px;
+    background-color: #190c02;
+    color: white
+}
+
+#left {
+    width: 60%;
+    float: left;
+    background-image: url("../img/background.png");
+    height: 100vh;
+}
+
+#right {
+    width: 40%;
+    height: 100vh;
+    float: left;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr:hover {
+    background-color: #dc7304;
+}
+
+#table-div {
+    background-color: #f4f4f4;
+    width: 792px;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#tools-div {
+    background-color: #f4f4f4;
+    width: fit-content;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#filters-div {
+    width: fit-content;
+    margin-left: auto;
+    font-size: 0;
+}
+
+button[name=filter] {
+    border-radius: 0;
+    width: 70px;
+}
+
+.text {
+    width: 227px;
+}
+
+.citizen {
+    width: 119px;
+}
+
+.house {
+    width: 145px;
+}
+
+.comment {
+    width: 100px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status {
+    width: 98px;
+}
+
+.action {
+    width: 84px;
+}
+
+.app, .disapp {
+    float: left;
+    width: 50%;
+}
+
+.app {
+    background-color: green;
+}
+
+.disapp {
+    background-color: red;
+}
+
+a {
+    display: inline-block;
+    background: #dc7304;
+    color: #fff;
+    padding: 1% 1%;
+    text-decoration: none;
+    border-radius: 3px;
+    margin-top: 7px;
+}
+
+a[href="/exit"] {
+    float: right;
+    margin-right: 5px;
+}
+
+p {
+    font-size: 20pt;
+    text-align: center;
+}
+
+#form-wrapper {
+    background-color: #f4f4f4;
+    width: 500px;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+.error {
+    color: red;
+}
+
+.form-part {
+    width: fit-content;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 14pt;
+}
+
+input, select {
+    font-size: 14pt;
+}
+
+#add-task {
+    width: 200px;
+    height: 50px;
+    margin-left: 150px;
+    margin-bottom: 50px;
+    border: 0;
+    background-color: #dc7304;
+    font-size: 14pt;
+    color: white;
+    border-radius: 10px;
+}
+
+#add-task:hover {
+    cursor: pointer;
+    border: 3px solid #683601;
+}
+

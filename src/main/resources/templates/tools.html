@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tools</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/right-picture.css">
+</head>
+<body>
+    <div id="left">
+
+        <header>
+            <a th:href="@{/}">Tasks</a>
+            <a th:href="@{/tools}">Tools</a>
+            <a th:if="${citizenId != 14}" th:href="@{/newTask}">New Task</a>
+            <a th:if="${citizenId == 14}" th:href="@{/statuettes}">Statuettes</a>
+            <a th:href="@{/exit}">Exit</a>
+            <span>
+                <span>Your money: </span>
+                <span th:text="${money}"></span>
+            </span>
+        </header>
+        <div id="tools-div">
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Busy</th>
+                    <th>Holder</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="tool : ${tools}">
+                    <td th:text="${tool.toolType.name}"></td>
+                    <td th:text="${tool.busy}"></td>
+                    <td class="citizen" th:if="${tool.holder}" th:text="${tool.holder.name}"></td>
+                    <td class="citizen" th:unless="${tool.holder}"></td>
+                    <td>
+                        <div th:if="${citizenId != 14}">
+                            <form method="post" th:action="@{/tools/take}" th:if="${!tool.busy}">
+                                <button class="action" name="toolId" th:value="${tool.id}">Take</button>
+                            </form>
+                            <form method="post" th:action="@{/tools/leave}" th:if="${tool.busy && tool.holder.id == citizenId}">
+                                <button class="action" name="toolId" th:value="${tool.id}">Leave</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="right" th:class="${citizen.shortName}"></div>
+</body>
+</html>
